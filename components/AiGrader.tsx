@@ -84,7 +84,8 @@ const AiGrader: React.FC<AiGraderProps> = ({ language }) => {
 
   const handleGrade = async () => {
     if (!studentSheet || !answerKey) {
-      setError('Please upload both the student answer sheet and the answer key.');
+      // FIX: Used translation key for error message.
+      setError(t.errorUploadBoth);
       return;
     }
     setIsLoading(true);

@@ -1,45 +1,53 @@
 import React from 'react';
-import { Feature } from '../types';
+import { Feature, User } from '../types';
 import { Language } from '../translations';
+
+// Import all feature components
 import SmartDashboard from './SmartDashboard';
 import LessonPlanner from './LessonPlanner';
 import ActivityGenerator from './ActivityGenerator';
-import InteractiveQuiz from './InteractiveQuiz';
+import AssessmentGenerator from './AssessmentGenerator';
 import AiGrader from './AiGrader';
 import InteractiveDiagram from './InteractiveDiagram';
 import SlideGenerator from './SlideGenerator';
-
+import Profile from './Profile';
 
 interface DashboardProps {
-  activeFeature: Feature;
+  feature: Feature;
   language: Language;
-  setIsPreviewMode: (isPreview: boolean) => void;
+  user: User;
+  onUpdateUser: (user: User) => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ activeFeature, language, setIsPreviewMode }) => {
+const Dashboard: React.FC<DashboardProps> = ({ feature, language, user, onUpdateUser }) => {
   const renderFeature = () => {
-    switch (activeFeature) {
-      case Feature.ClassInsights:
+    switch (feature) {
+      case 'dashboard':
         return <SmartDashboard language={language} />;
-      case Feature.LessonPlanner:
+      case 'lesson-planner':
         return <LessonPlanner language={language} />;
-      case Feature.ActivityGenerator:
+      case 'activity-generator':
         return <ActivityGenerator language={language} />;
-      case Feature.QuizGenerator:
-        return <InteractiveQuiz language={language} setIsPreviewMode={setIsPreviewMode} />;
-      case Feature.AiGrader:
+      case 'assessment-generator':
+        return <AssessmentGenerator language={language} />;
+      case 'ai-grader':
         return <AiGrader language={language} />;
-      case Feature.InteractiveDiagram:
+      case 'interactive-diagram':
         return <InteractiveDiagram language={language} />;
-      case Feature.SlideGenerator:
+      case 'slide-generator':
         return <SlideGenerator language={language} />;
+      case 'profile':
+        return <Profile user={user} onUpdateUser={onUpdateUser} language={language} />;
       default:
-        // Render dashboard as default to prevent blank screen
         return <SmartDashboard language={language} />;
     }
   };
 
-  return <>{renderFeature()}</>;
+  return (
+    <div>
+      {renderFeature()}
+    </div>
+  );
 };
 
 export default Dashboard;

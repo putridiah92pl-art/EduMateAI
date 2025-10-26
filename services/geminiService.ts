@@ -8,8 +8,9 @@ if (!process.env.API_KEY) {
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
-const getStyleInstructions = (style: string, language: Language) => {
-    const instructions = {
+// FIX: Added explicit typing to the instructions object to remove the @ts-ignore and improve type safety.
+const getStyleInstructions = (style: string, language: Language): string => {
+    const instructions: Record<Language, Record<string, string>> = {
         en: {
             'Minimalist': `Use a minimalist color palette. Background: #ffffff. Shapes: stroke #1f2937, fill #f9fafb. Text: #1f2937. Use a single, subtle accent color like #60a5fa (light blue) for highlights or key connectors.`,
             'Vibrant': `Use a vibrant and engaging color palette. Primary elements: #ef4444 (red-500). Secondary elements: #3b82f6 (blue-500). Connectors: #6b7280 (gray-500). Text: #1f2937. Backgrounds for shapes can be lighter tints like #fee2e2 or #dbeafe.`,
@@ -21,8 +22,6 @@ const getStyleInstructions = (style: string, language: Language) => {
             'Monochromatic': `Gunakan palet warna monokromatik berdasarkan satu rona warna (misalnya, biru). Gunakan berbagai bayangan dan corak. Contoh: #dbeafe (paling terang), #93c5fd, #3b82f6 (dasar), #1d4ed8 (paling gelap). Teks harus berwarna abu-abu gelap atau putih untuk kontras.`
         }
     };
-    // Provide a default or fallback
-    // @ts-ignore
     return instructions[language][style] || instructions[language]['Vibrant'];
 }
 
@@ -425,11 +424,11 @@ export async function gradeAnswerSheet(
 
     const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
-        contents: { parts: [
-            { text: prompts.aiGrader[language]() },
+        contents: [
+            prompts.aiGrader[language](),
             studentImagePart, 
             answerKeyImagePart
-        ]},
+        ],
         config: {
             responseMimeType: 'application/json',
             responseSchema: {

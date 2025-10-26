@@ -1,12 +1,24 @@
-export enum Feature {
-  ClassInsights = 'Class Insights',
-  LessonPlanner = 'Lesson Planner',
-  ActivityGenerator = 'Activity Generator',
-  QuizGenerator = 'Quiz Generator',
-  AiGrader = 'AI Grader',
-  InteractiveDiagram = 'Interactive Diagram',
-  SlideGenerator = 'Slide Generator Prompt',
+
+// This file was previously causing errors due to being a duplicate.
+// It has been corrected to define only the types it's responsible for.
+
+export type Feature =
+  | 'welcome'
+  | 'dashboard'
+  | 'lesson-planner'
+  | 'activity-generator'
+  | 'assessment-generator'
+  | 'ai-grader'
+  | 'interactive-diagram'
+  | 'slide-generator'
+  | 'profile';
+
+export interface User {
+  name: string;
+  email: string;
 }
+
+// --- Added Missing Type Definitions ---
 
 export interface LessonPlan {
   title: string;
@@ -29,12 +41,12 @@ export interface CreativeActivity {
 }
 
 export interface QuizQuestion {
-  id?: string;
+  id?: string; // Optional ID for client-side keying
   question: string;
-  type: string;
+  type: 'Multiple Choice' | 'Short Answer' | 'Essay';
   options?: string[];
-  correctAnswer: string;
-  explanation: string;
+  correctAnswer?: string;
+  explanation?: string;
 }
 
 export interface Quiz {
@@ -54,13 +66,6 @@ export interface GradedExam {
   }[];
 }
 
-export interface Annotation {
-  id: string;
-  x: number;
-  y: number;
-  text: string;
-}
-
 export interface DashboardInsights {
   summary: string;
   studentTiers: {
@@ -76,4 +81,11 @@ export interface DashboardInsights {
       title: string;
       description: string;
   }[];
+}
+
+export interface Annotation {
+  id: string;
+  x: number;
+  y: number;
+  text: string;
 }
