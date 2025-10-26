@@ -1,30 +1,40 @@
 import React, { useState } from 'react';
 import Card from './Card';
-import { User } from '../types';
 import { translations, Language } from '../translations';
+import { auth } from '../services/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 interface LoginProps {
-  onLogin: (user: User) => void;
   setView: (view: 'login' | 'register') => void;
   language: Language;
 }
 
-const Login: React.FC<LoginProps> = ({ onLogin, setView, language }) => {
+const Login: React.FC<LoginProps> = ({ setView, language }) => {
   const t = translations[language];
   const [email, setEmail] = useState('teacher@edumate.ai');
   const [password, setPassword] = useState('password123');
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, you'd validate credentials against a backend.
-    // Here, we'll simulate a successful login and derive the name from the email.
-    const name = email.split('@')[0].replace(/\./g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-    onLogin({ name, email });
+    setError(null);
+    setIsLoading(true);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // The onAuthStateChanged listener in App.tsx will handle the redirect.
+    } catch (err: any) {
+      const errorCode = err.code;
+      setError(t[errorCode] || `${t.error}: ${err.message}`);
+    } finally {
+        setIsLoading(false);
+    }
   };
 
   return (
     <Card title={<h2 className="text-2xl font-bold font-display text-center">{t.loginToAccount}</h2>}>
       <form onSubmit={handleSubmit} className="space-y-4">
+        {error && <p className="text-red-500 text-sm text-center bg-red-50 p-3 rounded-md">{error}</p>}
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t.email}</label>
           <input
@@ -49,9 +59,10 @@ const Login: React.FC<LoginProps> = ({ onLogin, setView, language }) => {
         </div>
         <button
           type="submit"
-          className="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-coral-peach hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-coral-peach transition-transform hover:scale-105"
+          disabled={isLoading}
+          className="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-coral-peach hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-coral-peach transition-transform hover:scale-105 disabled:bg-red-300"
         >
-          {t.login}
+          {isLoading ? `${t.generating}...` : t.login}
         </button>
       </form>
       <p className="mt-6 text-center text-sm text-gray-600">

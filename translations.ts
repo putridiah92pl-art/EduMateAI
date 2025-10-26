@@ -22,6 +22,7 @@ const en: Translations = {
   name: 'Name',
   email: 'Email Address',
   password: 'Password',
+  error: 'Error',
 
   // Welcome / Auth
   welcomeTitle: 'Welcome back to EduMate AI!',
@@ -34,6 +35,10 @@ const en: Translations = {
   getStarted: 'Get Started',
   loginToAccount: 'Login to your account',
   createNewAccount: 'Create a new account',
+  'auth/invalid-credential': 'Incorrect email or password. Please try again.',
+  'auth/email-already-in-use': 'This email is already registered. Please login.',
+  'auth/weak-password': 'Password is too weak. It should be at least 6 characters.',
+  'auth/invalid-email': 'Please enter a valid email address.',
   
   // Dashboard
   dashboardTitle: 'Smart Student Dashboard',
@@ -122,7 +127,7 @@ const en: Translations = {
   flowchart: 'Flowchart',
   clickToReveal: 'Click on elements to reveal details.',
   clickToAddNote: 'Click anywhere on the diagram to add a note.',
-  annotate: 'Annotate',
+  annotate: 'Beri Anotasi',
   exitEditMode: 'Finish Annotating',
   typeYourNote: 'Type your note...',
   errorGenerateDiagram: 'Failed to generate diagram. Please try again.',
@@ -169,6 +174,7 @@ const id: Translations = {
   name: 'Nama',
   email: 'Alamat Email',
   password: 'Kata Sandi',
+  error: 'Kesalahan',
 
   // Welcome / Auth
   welcomeTitle: 'Selamat datang kembali di EduMate AI!',
@@ -181,6 +187,10 @@ const id: Translations = {
   getStarted: 'Mulai',
   loginToAccount: 'Masuk ke akun Anda',
   createNewAccount: 'Buat akun baru',
+  'auth/invalid-credential': 'Email atau kata sandi salah. Silakan coba lagi.',
+  'auth/email-already-in-use': 'Email ini sudah terdaftar. Silakan masuk.',
+  'auth/weak-password': 'Kata sandi terlalu lemah. Harus terdiri dari setidaknya 6 karakter.',
+  'auth/invalid-email': 'Silakan masukkan alamat email yang valid.',
 
   // Dashboard
   dashboardTitle: 'Dasbor Siswa Cerdas',

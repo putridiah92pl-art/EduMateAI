@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import Login from './Login';
 import Register from './Register';
-import { User } from '../types';
 import { translations, Language } from '../translations';
 
 interface WelcomeProps {
-  onLogin: (user: User) => void;
-  onRegister: (user: User) => void;
   language: Language;
   setLanguage: (language: Language) => void;
 }
 
-const Welcome: React.FC<WelcomeProps> = ({ onLogin, onRegister, language, setLanguage }) => {
+const Welcome: React.FC<WelcomeProps> = ({ language, setLanguage }) => {
   const [view, setView] = useState<'login' | 'register'>('login');
   const t = translations[language];
 
@@ -44,9 +41,9 @@ const Welcome: React.FC<WelcomeProps> = ({ onLogin, onRegister, language, setLan
 
         <div className="w-full max-w-sm">
             {view === 'login' ? (
-                <Login onLogin={onLogin} setView={setView} language={language} />
+                <Login setView={setView} language={language} />
             ) : (
-                <Register onRegister={onRegister} setView={setView} language={language} />
+                <Register setView={setView} language={language} />
             )}
         </div>
     </div>
