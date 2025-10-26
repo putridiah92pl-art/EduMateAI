@@ -39,6 +39,7 @@ const en: Translations = {
   'auth/email-already-in-use': 'This email is already registered. Please login.',
   'auth/weak-password': 'Password is too weak. It should be at least 6 characters.',
   'auth/invalid-email': 'Please enter a valid email address.',
+  'auth/api-key-not-valid': 'Firebase API Key is not valid. Please configure it correctly in the application code.',
   
   // Dashboard
   dashboardTitle: 'Smart Student Dashboard',
@@ -191,6 +192,7 @@ const id: Translations = {
   'auth/email-already-in-use': 'Email ini sudah terdaftar. Silakan masuk.',
   'auth/weak-password': 'Kata sandi terlalu lemah. Harus terdiri dari setidaknya 6 karakter.',
   'auth/invalid-email': 'Silakan masukkan alamat email yang valid.',
+  'auth/api-key-not-valid': 'Kunci API Firebase tidak valid. Harap konfigurasikan dengan benar dalam kode aplikasi.',
 
   // Dashboard
   dashboardTitle: 'Dasbor Siswa Cerdas',

@@ -2,20 +2,31 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 
-// Your web app's Firebase configuration
-// IMPORTANT: Replace with your actual Firebase project configuration from your Firebase console.
+// =================================================================================
+// TODO: PASTE YOUR FIREBASE CONFIGURATION HERE
+// =================================================================================
+// Your web app's Firebase configuration.
+//
+// 1. Go to your Firebase project console: https://console.firebase.google.com/
+// 2. In the project settings, find your web app's configuration object.
+// 3. Copy the entire object and paste it here, replacing the placeholder values.
+// =================================================================================
 const firebaseConfig = {
-  apiKey: "AIzaSyABC-123DEF456GHI789JKL-MNO", // Replace with your value
-  authDomain: "your-project-id.firebaseapp.com", // Replace with your value
-  projectId: "your-project-id", // Replace with your value
-  storageBucket: "your-project-id.appspot.com", // Replace with your value
-  messagingSenderId: "123456789012", // Replace with your value
-  appId: "1:123456789012:web:a1b2c3d4e5f6g7h8i9j0" // Replace with your value
+  apiKey: "AIzaSyA6vxf_eJe3MMIiuS3Fqso-6RDthh4qRfQ",
+  authDomain: "YOUR_AUTH_DOMAIN.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
 // Initialize Firebase
 // This check prevents re-initialization on hot-reloads
 if (!firebase.apps.length) {
+  // Add a console warning for developers if placeholder values are still being used.
+  if (firebaseConfig.apiKey === "YOUR_API_KEY" || firebaseConfig.authDomain.startsWith("YOUR_")) {
+    console.warn("Firebase is using placeholder credentials. Please update your configuration in 'services/firebase.ts' for the app to function correctly.");
+  }
   firebase.initializeApp(firebaseConfig);
 }
 
